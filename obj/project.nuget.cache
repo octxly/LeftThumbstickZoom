@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "De2TamGqbbo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Julien\\VisualStudioProjects\\LeftThumbstickZoom\\LeftThumbstickZoom.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Julien\\.nuget\\packages\\bepinex.assemblypublicizer.msbuild\\0.4.2\\bepinex.assemblypublicizer.msbuild.0.4.2.nupkg.sha512"
+  ],
+  "logs": []
+}
