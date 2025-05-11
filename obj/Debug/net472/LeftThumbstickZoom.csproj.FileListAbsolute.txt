@@ -13,3 +13,4 @@ C:\Users\Julien\VisualStudioProjects\LeftThumbstickZoom\obj\Debug\net472\LeftThu
 C:\Users\Julien\VisualStudioProjects\LeftThumbstickZoom\obj\Debug\net472\LeftThum.1F60EBA7.Up2Date
 C:\Users\Julien\VisualStudioProjects\LeftThumbstickZoom\obj\Debug\net472\LeftThumbstickZoom.dll
 C:\Users\Julien\VisualStudioProjects\LeftThumbstickZoom\obj\Debug\net472\LeftThumbstickZoom.pdb
+C:\Users\Julien\VisualStudioProjects\LeftThumbstickZoom\obj\Debug\net472\LeftThumbstickZoom.sourcelink.json
