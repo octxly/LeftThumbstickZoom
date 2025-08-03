@@ -67,17 +67,6 @@ public class ThumbstickPatch
 						tsd.NextViewScale();
 					}
 				}
-				if (radar?.mfdPage?.isSOI == true || radar?.portalPage?.isSOI == true) 
-				{
-					if (y > 0) 
-					{
-						radar.RangeDown();
-					}
-					else if (y < 0) 
-					{
-						radar.RangeUp();
-					}
-				}
 
 				awaitingRelease = true;
 				return;

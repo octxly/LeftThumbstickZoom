@@ -10,8 +10,12 @@ public class RadarElevationPatch
     {
         var name = FlightSceneManager.instance.playerVehicleMaster?.playerVehicle?.vehicleName;
 
+        var radar = FlightSceneManager.instance.playerVehicleMaster.comms.radarPage;
+
         //Only slew radar on thumbstick down
-        if (!StartPatch.thumbstickDown && name != "EF-24G" && name != "AH-94") return false;
-        return true;
+        if (name == "EF-24G" || name == "AH-94") return false;
+
+        //Only slew in SOI
+        return radar?.mfdPage?.isSOI == true || radar?.portalPage?.isSOI == true;
     }
 }
