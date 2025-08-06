@@ -3,6 +3,7 @@
 //using UnityEngine;
 
 //DEPRECATED FOR NOW - WORKING ON AH-94 COMPAT
+//NOT WORKING ON IT ANYMORE
 
 //namespace LeftThumbstickZoom.AH94;
 

@@ -1,5 +1,6 @@
-using System;
 using HarmonyLib;
+using System;
+using System.Xml.Linq;
 using UnityEngine;
 
 namespace LeftThumbstickZoom;
@@ -18,9 +19,12 @@ public class ThumbstickPatch
 		if (StartPatch.audioSource == null) StartPatch.audioSource = ___inputAudioSource;
 		if (StartPatch.audioClip == null) StartPatch.audioClip = ___switchedClip;
 
-		var name = FlightSceneManager.instance.playerVehicleMaster?.playerVehicle?.vehicleName;
+        var name = FlightSceneManager.instance.playerVehicleMaster?.playerVehicle?.vehicleName;
+		//Fixes issue of thumbstick getting "stuck" down
+		if (StartPatch.thumbstickDown == true && (name == "EF-24G" || name == "T-55" || name == "F/A-26B" || name == "F-16" || name == "A-10D")) 
+			StartPatch.thumbstickDown = false;
 
-		if (name != "EF-24G" && name != "AH-94")
+		if (name != "EF-24G" && name != "AH-94" && name != "AH-6")
 		{
 			//Check that it's the first frame above input threshhold
 			if (Mathf.Abs(ts.y) > activationThresh && !awaitingRelease && !StartPatch.thumbstickDown) 
