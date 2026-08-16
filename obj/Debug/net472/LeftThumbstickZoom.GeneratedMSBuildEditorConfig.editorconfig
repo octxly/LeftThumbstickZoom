@@ -1,6 +1,6 @@
 is_global = true
 build_property.RootNamespace = LeftThumbstickZoom
-build_property.ProjectDir = C:\Users\Julien\VisualStudioProjects\LeftThumbstickZoom\
+build_property.ProjectDir = /home/julian/RiderProjects/LeftThumbstickZoom/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false

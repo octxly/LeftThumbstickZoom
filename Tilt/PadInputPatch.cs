@@ -1,3 +1,5 @@
+//I don't believe that PadInput is actually used, but PadInputScaled is used instead
+
 //using HarmonyLib;
 
 //namespace LeftThumbstickZoom;

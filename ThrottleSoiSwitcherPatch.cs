@@ -7,7 +7,7 @@ namespace LeftThumbstickZoom;
 
 [HarmonyPatch(typeof(ThrottleSOISwitcher))]
 [HarmonyPatch("OnSetThumbstick")]
-public class ThumbstickPatch
+public class ThrottleSoiSwitcherPatch
 {
 	public static bool awaitingRelease;
 	public static float activationThresh = 0.8f;
@@ -16,24 +16,25 @@ public class ThumbstickPatch
 	//Patch ThrottleSOISwitcher.OnSetThumbstick with a postfix path, executes after code.
 	public static void Postfix(Vector3 ts, AudioSource ___inputAudioSource, AudioClip ___switchedClip)
 	{
-		if (StartPatch.audioSource == null) StartPatch.audioSource = ___inputAudioSource;
-		if (StartPatch.audioClip == null) StartPatch.audioClip = ___switchedClip;
+		if (VRThrottlePatch.audioSource == null) VRThrottlePatch.audioSource = ___inputAudioSource;
+		if (VRThrottlePatch.audioClip == null) VRThrottlePatch.audioClip = ___switchedClip;
+		
+		// //Fixes issue of thumbstick getting "stuck" down
+		// if (StartPatch.thumbstickDown && (name == "EF-24G" || name == "T-55" || name == "F/A-26B" || name == "F-16" || name == "A-10D")) 
+		// 	StartPatch.thumbstickDown = false;
 
-        var name = FlightSceneManager.instance.playerVehicleMaster?.playerVehicle?.vehicleName;
-		//Fixes issue of thumbstick getting "stuck" down
-		if (StartPatch.thumbstickDown == true && (name == "EF-24G" || name == "T-55" || name == "F/A-26B" || name == "F-16" || name == "A-10D")) 
-			StartPatch.thumbstickDown = false;
-
-		if (name != "EF-24G" && name != "AH-94" && name != "AH-6")
+		var vehicleMaster = FlightSceneManager.instance.playerVehicleMaster;
+		
+		//Exempt helicopters and EF-24G from this logic as they don't need zoom capability - helis are added separately
+		if (vehicleMaster != null && vehicleMaster.playerVehicle.vehicleName != "EF-24G" && !vehicleMaster.isHelicopter)
 		{
 			//Check that it's the first frame above input threshhold
-			if (Mathf.Abs(ts.y) > activationThresh && !awaitingRelease && !StartPatch.thumbstickDown) 
+			if (Mathf.Abs(ts.y) > activationThresh && !awaitingRelease && !VRThrottlePatch.thumbstickDown) 
 			{
 				//Get objects for each mfd
 				TargetingMFDPage tgp = FlightSceneManager.instance.playerVehicleMaster.comms.targetingPage;
 				MFDPTacticalSituationDisplay tsd = FlightSceneManager.instance.playerVehicleMaster.comms.tsdPage;
 				DashMapDisplay nav = FlightSceneManager.instance.playerVehicleMaster.comms.targetingPage?.map;
-				MFDRadarUI radar = FlightSceneManager.instance.playerVehicleMaster.comms.radarPage;
 
 				float y = ts.y * (Main.settings.invertAxis ? -1 : 1);
 
