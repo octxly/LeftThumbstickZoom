@@ -54,8 +54,11 @@ public class CollectiveFunctionsPatch
             }
         }
 
-        //If awaiting release, then prevent pylon tilt code from executing
-        //Also introduce a small dead zone for pylon tilt axis
-        return Math.Abs(axis.y) > 0.3 && !awaitingRelease;
+        //Introduce small deadzone to the pylon tilt axis
+        if (Math.Abs(axis.y) < 0.3 && __instance.combatCollective.IsTriggerPressed())
+        {
+            return false;
+        }
+        else return true;
     }
 }
